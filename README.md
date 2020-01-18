@@ -1,0 +1,2 @@
+# omnistack
+Workshop semana omnistack
