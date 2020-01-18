@@ -13,11 +13,13 @@ module.exports = {
         };
     },
     async destroy(request, response){
-
+        const {github_username} = request.query;
+        Dev.deleteOne({github_username});
+        
+        return response.json({message: "Deleted"});
+    
     },
-    async update(request, response){
-
-    },
+   
     async index(request, response) {
         devs = await Dev.find();
         return response.json(devs);
