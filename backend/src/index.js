@@ -1,3 +1,4 @@
+const cors = require('cors');
 const express = require('express');
 const mongoose = require('mongoose');
 const app = express();
@@ -8,8 +9,9 @@ mongoose.connect("mongodb+srv://rpsilva:tio5690@cluster0-pfnxd.mongodb.net/week1
     useNewUrlParser: true,
 });
 
+app.use(cors());
 app.use(express.json());
 app.use(routes);
 
 
-app.listen(5000);
+app.listen(3333);
