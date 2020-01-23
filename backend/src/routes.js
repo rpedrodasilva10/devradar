@@ -5,8 +5,8 @@ const DevController = require('./controllers/DevControllers')
 const SearchController = require('./controllers/SearchController')
 
 routes.get('/devs', DevController.index);
-routes.get('/devs/dev', DevController.show);
-routes.delete('/devs/dev', DevController.destroy)
+routes.get('/devs/:github_username', DevController.show);
+routes.delete('/devs', DevController.destroy)
 routes.post('/devs', DevController.store);
 
 

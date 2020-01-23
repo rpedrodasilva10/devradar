@@ -6,18 +6,24 @@ const parseStringAsArray = require('../utils/parseStringAsArray')
 module.exports = {
 
     async show(request, response){
-        const {github_username} = request.query;
-        const dev = await Dev.findOne({github_username});
+        const {github_username} = request.params
+        const dev = await Dev.findOne({github_username: github_username});
+        
         if(dev){
             return response.json(dev);
         };
     },
     async destroy(request, response){
         const {github_username} = request.query;
-        Dev.deleteOne({github_username});
-        
-        return response.json({message: "Deleted"});
-    
+         
+        const api_return = await Dev.deleteOne({github_username});
+        const { ok } = api_return;
+        if (ok ===1) {
+            return response.json({message: "Deleted"});
+        }
+        else {
+            return response.json({message: "Failed"});
+        }
     },
    
     async index(request, response) {
