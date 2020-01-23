@@ -11,15 +11,18 @@ module.exports = {
         
         if(dev){
             return response.json(dev);
+        }else{
+            return response.json([]);
         };
+        
     },
     async destroy(request, response){
         const {github_username} = request.params;
          
         const api_return = await Dev.deleteOne({github_username});
         
-        const { n } = api_return;
-        if (n === 1) {
+        const deleted_rows = { n } = api_return;
+        if (deleted_rows === 1) {
             return response.status(200).json({'message': 'Resource DELETED' });
         }
         else {
@@ -28,15 +31,14 @@ module.exports = {
     },
    
     async index(request, response) {
-        devs = await Dev.find();
-        return response.json(devs);
+        const devs = await Dev.find();
         
+        return response.json(devs.length ? devs : {"message": "No data to show"});
     },
     async store(request, response){
         const { github_username, techs, longitude, latitude } = request.body
 
         let dev = await Dev.findOne({github_username});
-
         if (!dev) {
             const api_response = await axios.get(`https://api.github.com/users/${github_username}`)
 

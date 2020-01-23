@@ -17,7 +17,7 @@ function App() {
         async function loadDevs() {
             const response = await api.get('/devs')
 
-            setDevs(response.data)
+            setDevs(response.data.length ? response.data : [])
         }
 
         loadDevs()
