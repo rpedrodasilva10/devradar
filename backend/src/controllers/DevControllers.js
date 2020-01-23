@@ -14,15 +14,16 @@ module.exports = {
         };
     },
     async destroy(request, response){
-        const {github_username} = request.query;
+        const {github_username} = request.params;
          
         const api_return = await Dev.deleteOne({github_username});
-        const { ok } = api_return;
-        if (ok ===1) {
-            return response.json({message: "Deleted"});
+        
+        const { n } = api_return;
+        if (n === 1) {
+            return response.status(200).json({'message': 'Resource DELETED' });
         }
         else {
-            return response.json({message: "Failed"});
+            return response.status(404).json({'message': 'Resource not found' });
         }
     },
    
