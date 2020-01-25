@@ -19,16 +19,10 @@ module.exports = {
     async destroy(request, response){
         const {github_username} = request.params;
          
-        const api_return = await Dev.deleteOne({github_username});
+        await Dev.deleteOne({github_username});
         
-        const deleted_rows = { n } = api_return;
-        if (deleted_rows === 1) {
-            return response.status(200).json({'message': 'Resource DELETED' });
-        }
-        else {
-            return response.status(404).json({'message': 'Resource not found' });
-        }
-    },
+        return response.status(200).json({'message': 'Deleted' });
+    }  ,
    
     async index(request, response) {
         const devs = await Dev.find();
