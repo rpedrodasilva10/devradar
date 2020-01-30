@@ -20,8 +20,8 @@ function DevItem({dev, onClick}) {
                 <strong>{dev.name}</strong>
                 <span>{dev.techs.join(', ')}</span>
               </div>
-              <button onClick={handleOnClick} className="delete-button">Excluir Dev</button>
             </header>
+            <button onClick={handleOnClick} className="delete-button">Excluir Dev</button>  
             <p>{dev.bio}</p>
             
             <a href={`http://github.com/${dev.github_username}`}>Acessar perfil do Github</a>
